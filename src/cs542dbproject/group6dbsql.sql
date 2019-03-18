@@ -32,6 +32,8 @@ location_id int,
 room_number int,
 street_num int,
 street_name char(50),
+type_l char(50),
+name_l char(50),
 primary key (location_id),
 foreign key (street_num, street_name) references address (street_num, street_name));
 
