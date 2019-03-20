@@ -4,43 +4,109 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
+import com.opencsv.enums.CSVReaderNullFieldIndicator;
 
+import model.Location;
+import model.Outcome;
+import model.RecievingHospital;
+import model.Staff;
+import model.Time;
+import model.TypeofCall;
+import util.Setting;
 
 public class CSVPaser {
 	private String filePath = null;
-	
+
+	private List<Time> timeList;
+	private List<Location> locationList;
+	private List<RecievingHospital> recvHospList;
+	private List<Staff> staffList;
+	private List<TypeofCall> typeCallList;
+
 	/**
 	 * ctor
-	 * @param filePath
+	 * 
+	 * @param filePath create all new object list
 	 */
 	public CSVPaser(String filePath) {
 		this.filePath = filePath;
+
+		this.timeList = new ArrayList<Time>();
+		this.locationList = new ArrayList<Location>();
+		this.recvHospList = new ArrayList<RecievingHospital>();
+		this.staffList = new ArrayList<Staff>();
+		this.typeCallList = new ArrayList<TypeofCall>();
+
 	}
-	
+
 	/**
 	 * 
 	 * @return List<String[]> csvRecords
+	 * @throws IOException
 	 */
-	public List<String[]> readCSV() {
+	public List<String[]> readCSV() throws IOException {
+
 		List<String[]> csvRecords = null;
 
-		try {
-
-			Reader reader = Files.newBufferedReader(Paths.get(this.filePath));
-			CSVReader csvReader = new CSVReader(reader);
-			csvRecords = csvReader.readAll();
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		Reader reader = Files.newBufferedReader(Paths.get(this.filePath));
+		CSVReader csvReader = new CSVReaderBuilder(reader).withFieldAsNull(CSVReaderNullFieldIndicator.EMPTY_SEPARATORS)
+				// Skip the header
+				.withSkipLines(1).build();
+		csvRecords = csvReader.readAll();
 		return csvRecords;
-		
 	}
+
+	/**
+	 * 
+	 * @param records
+	 */
 	
-	
+	//TODO: revisit the naming
+	//TODO: location is missing
+	public int buildModel(List<String[]> records) {
+		int checkCount = 0;
+		for (String[] record : records) {
+			//populate time records
+			Time dispatched = new Time(Timestamp.valueOf(record[0]), Setting.CSV_FORMATE[0]);
+			Time Enrout = new Time(Timestamp.valueOf(record[1]), Setting.CSV_FORMATE[1]);
+			Time arrived = new Time(Timestamp.valueOf(record[2]), Setting.CSV_FORMATE[2]);
+			Time available = new Time(Timestamp.valueOf(record[3]), Setting.CSV_FORMATE[3]);
+			Time eaDispatched = new Time(Timestamp.valueOf(record[4]), "EA-Dispatch");
+			Time eaArrived = new Time(Timestamp.valueOf(record[5]), "EA-Arrived");
+			Time eaClear = new Time(Timestamp.valueOf(record[6]), "EA-Clear");
+			timeList.add(dispatched);
+			timeList.add(Enrout);
+			timeList.add(arrived);
+			timeList.add(available);
+			timeList.add(eaDispatched);
+			timeList.add(eaArrived);
+			timeList.add(eaClear);
+			//end time records
+			
+			//populate Type of Call
+			Outcome outCome = new Outcome (record[9],record[10]);
+			TypeofCall call = new TypeofCall(record[7], record[14], outCome);
+			typeCallList.add(call);
+			//TODO: ASK about the receving service structure, will hospital and EMS occure at same time?
+			//TODO: Referring is missing
+			//end of type of call
+			
+			//populate Staff
+			Staff staff1 = new Staff( record[11], record[16]);
+			Staff staff2 = new Staff( record[12], record[17]);
+			Staff staff3 = new Staff( record[13], record[18]);
+			staffList.add(staff1);
+			staffList.add(staff2);
+			staffList.add(staff3);
+			checkCount++;
+		}
+		return checkCount;
+	}
+
 }
