@@ -13,7 +13,7 @@ drop table time_t cascade constraints;
 create table time_t (
 time_t date,
 type_t char(50) unique,
-primary key (time_t));
+primary key (time_t, type_t));
 
 create table staff (
 staff_id int,
@@ -67,8 +67,7 @@ time_t date,
 call_id int,
 type_t char(50),
 primary key (time_t, call_id),
-foreign key (time_t) references time_t (time_t),
-foreign key (type_t) references time_t (type_t),
+foreign key (time_t, type_t) references time_t (time_t, type_t),
 foreign key (call_id) references type_of_call (call_id));
 
 create table respond_to (
@@ -84,8 +83,7 @@ time_t date,
 type_t char(50),
 primary key (staff_id, time_t),
 foreign key (staff_id) references staff (staff_id),
-foreign key (time_t) references time_t (time_t),
-foreign key (type_t) references time_t (type_t));
+foreign key (time_t, type_t) references time_t (time_t, type_t));
 
 
 
