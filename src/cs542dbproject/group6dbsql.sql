@@ -1,3 +1,5 @@
+-- drop table statments
+
 drop table response_time cascade constraints;
 drop table respond_to cascade constraints;
 drop table times_of_call cascade constraints;
@@ -9,6 +11,7 @@ drop table staff cascade constraints;
 drop table address cascade constraints;
 drop table time_t cascade constraints;
 
+-- create table statements
 
 create table time_t (
 time_t date,
@@ -84,6 +87,38 @@ type_t char(50),
 primary key (staff_id, time_t),
 foreign key (staff_id) references staff (staff_id),
 foreign key (time_t, type_t) references time_t (time_t, type_t));
+
+-- sequencers
+
+CREATE SEQUENCE seq_staffid
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1
+CACHE 25;
+
+CREATE SEQUENCE seq_locid
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1
+CACHE 25;
+
+CREATE SEQUENCE seq_hospitalid
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1
+CACHE 25;
+
+CREATE SEQUENCE seq_outcomeid
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1
+CACHE 25;
+
+CREATE SEQUENCE seq_callid
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1
+CACHE 25;
 
 
 
