@@ -1,6 +1,6 @@
 package model;
 
-public class RecievingHospital {
+public class ReceivingHospital {
 	private String hospitalID;
 	private String hospitalName;
 	private Location location;
@@ -29,9 +29,13 @@ public class RecievingHospital {
 		this.location = location;
 	}
 
-	public RecievingHospital(String hospitalID, String hospitalName, Location location) {
-		super();
+	public ReceivingHospital(String hospitalID, String hospitalName, Location location) {
 		this.hospitalID = hospitalID;
+		this.hospitalName = hospitalName;
+		this.location = location;
+	}
+	
+	public ReceivingHospital( String hospitalName, Location location) {
 		this.hospitalName = hospitalName;
 		this.location = location;
 	}

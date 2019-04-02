@@ -4,24 +4,24 @@ public class Outcome {
 	private String outcomeID;
 	private String result;
 	private String receivingService;
-	private RecievingHospital recvHosptial;
+	private ReceivingHospital recvHosptial;
 
-	public Outcome(String outcomeID, String result, String receivingService,RecievingHospital recvHosptial) {
+	public Outcome(String outcomeID, String result, String receivingService,ReceivingHospital recvHosptial) {
 		this.outcomeID = outcomeID;
 		this.result = result;
 		this.receivingService = receivingService;
 		this.recvHosptial = recvHosptial;
 	}
 
-	public RecievingHospital getRecvHosptial() {
+	public ReceivingHospital getRecvHosptial() {
 		return recvHosptial;
 	}
 
-	public void setRecvHosptial(RecievingHospital recvHosptial) {
+	public void setRecvHosptial(ReceivingHospital recvHosptial) {
 		this.recvHosptial = recvHosptial;
 	}
 
-	public Outcome(String result, String receivingService,RecievingHospital recvHosptial) {
+	public Outcome(String result, String receivingService,ReceivingHospital recvHosptial) {
 		this.result = result;
 		this.receivingService = receivingService;
 		this.recvHosptial = recvHosptial;

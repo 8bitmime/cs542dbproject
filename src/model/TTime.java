@@ -3,10 +3,10 @@ package model;
 
 import java.sql.Timestamp;
 
-public class Time {
+public class TTime {
 	private Timestamp time;
 	private String timeType;
-	public Time(Timestamp time, String timeType) {
+	public TTime(Timestamp time, String timeType) {
 		super();
 		this.time = time;
 		this.timeType = timeType;

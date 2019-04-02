@@ -14,18 +14,18 @@ import com.opencsv.enums.CSVReaderNullFieldIndicator;
 
 import model.Location;
 import model.Outcome;
-import model.RecievingHospital;
+import model.ReceivingHospital;
 import model.Staff;
-import model.Time;
+import model.TTime;
 import model.TypeofCall;
 import util.Setting;
 
 public class CSVPaser {
 	private String filePath = null;
 
-	private List<Time> timeList;
+	private List<TTime> timeList;
 	private List<Location> locationList;
-	private List<RecievingHospital> recvHospList;
+	private List<ReceivingHospital> recvHospList;
 	private List<Staff> staffList;
 	private List<TypeofCall> typeCallList;
 
@@ -37,9 +37,9 @@ public class CSVPaser {
 	public CSVPaser(String filePath) {
 		this.filePath = filePath;
 
-		this.timeList = new ArrayList<Time>();
+		this.timeList = new ArrayList<TTime>();
 		this.locationList = new ArrayList<Location>();
-		this.recvHospList = new ArrayList<RecievingHospital>();
+		this.recvHospList = new ArrayList<ReceivingHospital>();
 		this.staffList = new ArrayList<Staff>();
 		this.typeCallList = new ArrayList<TypeofCall>();
 
@@ -73,13 +73,13 @@ public class CSVPaser {
 		int checkCount = 0;
 		for (String[] record : records) {
 			//populate time records
-			Time dispatched = new Time(Timestamp.valueOf(record[0]), Setting.CSV_FORMATE[0]);
-			Time Enrout = new Time(Timestamp.valueOf(record[1]), Setting.CSV_FORMATE[1]);
-			Time arrived = new Time(Timestamp.valueOf(record[2]), Setting.CSV_FORMATE[2]);
-			Time available = new Time(Timestamp.valueOf(record[3]), Setting.CSV_FORMATE[3]);
-			Time eaDispatched = new Time(Timestamp.valueOf(record[4]), "EA-Dispatch");
-			Time eaArrived = new Time(Timestamp.valueOf(record[5]), "EA-Arrived");
-			Time eaClear = new Time(Timestamp.valueOf(record[6]), "EA-Clear");
+			TTime dispatched = new TTime(Timestamp.valueOf(record[0]), Setting.CSV_FORMATE[0]);
+			TTime Enrout = new TTime(Timestamp.valueOf(record[1]), Setting.CSV_FORMATE[1]);
+			TTime arrived = new TTime(Timestamp.valueOf(record[2]), Setting.CSV_FORMATE[2]);
+			TTime available = new TTime(Timestamp.valueOf(record[3]), Setting.CSV_FORMATE[3]);
+			TTime eaDispatched = new TTime(Timestamp.valueOf(record[4]), "EA-Dispatch");
+			TTime eaArrived = new TTime(Timestamp.valueOf(record[5]), "EA-Arrived");
+			TTime eaClear = new TTime(Timestamp.valueOf(record[6]), "EA-Clear");
 			timeList.add(dispatched);
 			timeList.add(Enrout);
 			timeList.add(arrived);
@@ -90,7 +90,8 @@ public class CSVPaser {
 			//end time records
 			
 			//populate Type of Call
-			Outcome outCome = new Outcome (record[9],record[10]);
+			ReceivingHospital recvHospital = new ReceivingHospital(record[8],null);
+			Outcome outCome = new Outcome (record[9],record[10], recvHospital);
 			TypeofCall call = new TypeofCall(record[7], record[14], outCome);
 			typeCallList.add(call);
 			//TODO: ASK about the receving service structure, will hospital and EMS occure at same time?
