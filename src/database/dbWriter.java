@@ -39,8 +39,8 @@ public class dbWriter {
 //            }
 
         	PreparedStatement ps = conn.prepareStatement("INSERT INTO loc (location_id ,room_number,street_num,street_name,type_l,name_l) values(seq_locid.nextval,?,?,?,?,?);");
-            ps.setInt(1,  Integer.parseInt(location.getRoomNumber()));
-            ps.setInt(2,  Integer.parseInt(location.getStreetNumber()));
+            ps.setInt(1,  location.getRoomNumber());
+            ps.setInt(2,  location.getStreetNumber());
             ps.setString(3,  location.getStreetName());
             ps.setString(4,  location.getType());
             ps.setString(5,  location.getName());
@@ -92,7 +92,7 @@ public class dbWriter {
 
         	PreparedStatement ps = conn.prepareStatement("INSERT INTO recieving_hospital (hospital_id ,hospital_name ,location_id) values(seq_hospitalid.nextval,?,?);");
             ps.setString(1,  hospital.getHospitalName());
-            ps.setInt(2,  Integer.parseInt(hospital.getLocation().getLocationID()));
+            ps.setInt(2,  hospital.getLocation().getLocationID());
             ps.execute();
             return true;
             
@@ -116,7 +116,7 @@ public class dbWriter {
 
         	PreparedStatement ps = conn.prepareStatement("INSERT INTO staff (staff_id, name_s, badge_id,dob) values(seq_staffid.nextval,?,?,?);");
             ps.setString(1,  staff.getName());
-            ps.setInt(2,  Integer.parseInt(staff.getBadgeID()));
+            ps.setInt(2,  staff.getBadgeID());
             ps.setTimestamp(3, staff.getDateofBirth());
             ps.execute();
             return true;
@@ -166,7 +166,7 @@ public class dbWriter {
         	PreparedStatement ps = conn.prepareStatement("INSERT INTO type_of_call (call_id, reported, actual,outcome_id, location_id) values(seq_callid.nextval,?,?,?,?);");
             ps.setString(1, call.getReported());
             ps.setString(2, call.getActural());
-            ps.setInt(3, Integer.getInteger(call.getOutcome().getOutcomeID()));
+            ps.setInt(3, call.getOutcome().getOutcomeID());
             // TODO how to get thoes id
             ps.execute();
             return true;

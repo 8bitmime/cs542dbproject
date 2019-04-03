@@ -1,13 +1,17 @@
 package model;
 
 public class Location {
-	private String locationID;
-	private String roomNumber;
-	private String streetNumber;
+	private int locationID;
+	private int roomNumber;
+	private int streetNumber;
 	private String streetName;
 	private String type;
 	private String name;
-	public Location(String locationID, String roomNumber, String streetNumber, String streetName, String type,
+	
+	public Location(){
+		
+	}
+	public Location(int locationID, int roomNumber, int streetNumber, String streetName, String type,
 			String name) {
 		this.locationID = locationID;
 		this.roomNumber = roomNumber;
@@ -16,22 +20,22 @@ public class Location {
 		this.type = type;
 		this.name = name;
 	}
-	public String getLocationID() {
+	public int getLocationID() {
 		return locationID;
 	}
-	public void setLocationID(String locationID) {
+	public void setLocationID(int locationID) {
 		this.locationID = locationID;
 	}
-	public String getRoomNumber() {
+	public int getRoomNumber() {
 		return roomNumber;
 	}
-	public void setRoomNumber(String roomNumber) {
+	public void setRoomNumber(int roomNumber) {
 		this.roomNumber = roomNumber;
 	}
-	public String getStreetNumber() {
+	public int getStreetNumber() {
 		return streetNumber;
 	}
-	public void setStreetNumber(String streetNumber) {
+	public void setStreetNumber(int streetNumber) {
 		this.streetNumber = streetNumber;
 	}
 	public String getStreetName() {

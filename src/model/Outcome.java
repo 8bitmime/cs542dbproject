@@ -1,12 +1,16 @@
 package model;
 
 public class Outcome {
-	private String outcomeID;
+	private int outcomeID;
 	private String result;
 	private String receivingService;
 	private ReceivingHospital recvHosptial;
+	
+	public Outcome(){
+		
+	}
 
-	public Outcome(String outcomeID, String result, String receivingService,ReceivingHospital recvHosptial) {
+	public Outcome(int outcomeID, String result, String receivingService,ReceivingHospital recvHosptial) {
 		this.outcomeID = outcomeID;
 		this.result = result;
 		this.receivingService = receivingService;
@@ -27,11 +31,11 @@ public class Outcome {
 		this.recvHosptial = recvHosptial;
 	}
 
-	public String getOutcomeID() {
+	public int getOutcomeID() {
 		return outcomeID;
 	}
 
-	public void setOutcomeID(String outcomeID) {
+	public void setOutcomeID(int outcomeID) {
 		this.outcomeID = outcomeID;
 	}
 

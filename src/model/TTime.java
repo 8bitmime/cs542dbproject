@@ -4,8 +4,13 @@ package model;
 import java.sql.Timestamp;
 
 public class TTime {
+	
 	private Timestamp time;
 	private String timeType;
+	
+	public TTime(){
+		
+	}
 	public TTime(Timestamp time, String timeType) {
 		super();
 		this.time = time;

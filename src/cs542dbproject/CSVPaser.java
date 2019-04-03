@@ -99,9 +99,9 @@ public class CSVPaser {
 			//end of type of call
 			
 			//populate Staff
-			Staff staff1 = new Staff( record[11], record[16]);
-			Staff staff2 = new Staff( record[12], record[17]);
-			Staff staff3 = new Staff( record[13], record[18]);
+			Staff staff1 = new Staff( record[11], Integer.parseInt(record[16]));
+			Staff staff2 = new Staff( record[12], Integer.parseInt(record[17]));
+			Staff staff3 = new Staff( record[13], Integer.parseInt(record[18]));
 			staffList.add(staff1);
 			staffList.add(staff2);
 			staffList.add(staff3);

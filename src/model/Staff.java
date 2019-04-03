@@ -3,12 +3,15 @@ package model;
 import java.sql.Timestamp;
 
 public class Staff {
-	private String staffID;
+	private int staffID;
 	private String name;
-	private String badgeID;
+	private int badgeID;
 	private Timestamp dateofBirth;
 	
-	public Staff(String staffID, String name, String badgeID, Timestamp dateofBirth) {
+	public Staff(){
+		
+	}
+	public Staff(int staffID, String name, int badgeID, Timestamp dateofBirth) {
 		super();
 		this.staffID = staffID;
 		this.name = name;
@@ -16,15 +19,15 @@ public class Staff {
 		this.dateofBirth = dateofBirth;
 	}
 	
-	public Staff(String name, String badgeID) {
+	public Staff(String name, int badgeID) {
 		this.name = name;
 		this.badgeID = badgeID;
 	}
 	
-	public String getStaffID() {
+	public int getStaffID() {
 		return staffID;
 	}
-	public void setStaffID(String staffID) {
+	public void setStaffID(int staffID) {
 		this.staffID = staffID;
 	}
 	public String getName() {
@@ -33,10 +36,10 @@ public class Staff {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getBadgeID() {
+	public int getBadgeID() {
 		return badgeID;
 	}
-	public void setBadgeID(String badgeID) {
+	public void setBadgeID(int badgeID) {
 		this.badgeID = badgeID;
 	}
 	public Timestamp getDateofBirth() {
