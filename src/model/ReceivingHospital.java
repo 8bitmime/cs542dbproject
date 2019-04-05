@@ -3,12 +3,21 @@ package model;
 public class ReceivingHospital {
 	private int hospitalID;
 	private String hospitalName;
-	private Location location;
-
-	public ReceivingHospital(){
-		
+	private String hospitalAddress;
+	
+	public ReceivingHospital(int hospitalID, String hospitalName,
+			String hospitalAddress) {
+		this.hospitalID = hospitalID;
+		this.hospitalName = hospitalName;
+		this.hospitalAddress = hospitalAddress;
 	}
 	
+	public ReceivingHospital(String hospitalName,
+			String hospitalAddress) {
+		this.hospitalName = hospitalName;
+		this.hospitalAddress = hospitalAddress;
+	}
+
 	public int getHospitalID() {
 		return hospitalID;
 	}
@@ -25,23 +34,12 @@ public class ReceivingHospital {
 		this.hospitalName = hospitalName;
 	}
 
-	public Location getLocation() {
-		return location;
+	public String getHospitalAddress() {
+		return hospitalAddress;
 	}
 
-	public void setLocation(Location location) {
-		this.location = location;
-	}
-
-	public ReceivingHospital(int hospitalID, String hospitalName, Location location) {
-		this.hospitalID = hospitalID;
-		this.hospitalName = hospitalName;
-		this.location = location;
+	public void setHospitalAddress(String hospitalAddress) {
+		this.hospitalAddress = hospitalAddress;
 	}
 	
-	public ReceivingHospital( String hospitalName, Location location) {
-		this.hospitalName = hospitalName;
-		this.location = location;
-	}
-
 }

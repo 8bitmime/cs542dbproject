@@ -3,29 +3,20 @@ package model;
 public class Outcome {
 	private int outcomeID;
 	private String result;
-	private String receivingService;
+	private ReceivingService receivingService;
 	private ReceivingHospital recvHosptial;
-	
-	public Outcome(){
-		
-	}
 
-	public Outcome(int outcomeID, String result, String receivingService,ReceivingHospital recvHosptial) {
+	public Outcome(int outcomeID, String result,
+			ReceivingService receivingService, ReceivingHospital recvHosptial) {
 		this.outcomeID = outcomeID;
 		this.result = result;
 		this.receivingService = receivingService;
 		this.recvHosptial = recvHosptial;
 	}
 
-	public ReceivingHospital getRecvHosptial() {
-		return recvHosptial;
-	}
+	public Outcome(String result, ReceivingService receivingService,
+			ReceivingHospital recvHosptial) {
 
-	public void setRecvHosptial(ReceivingHospital recvHosptial) {
-		this.recvHosptial = recvHosptial;
-	}
-
-	public Outcome(String result, String receivingService,ReceivingHospital recvHosptial) {
 		this.result = result;
 		this.receivingService = receivingService;
 		this.recvHosptial = recvHosptial;
@@ -47,12 +38,20 @@ public class Outcome {
 		this.result = result;
 	}
 
-	public String getReceivingService() {
+	public ReceivingService getReceivingService() {
 		return receivingService;
 	}
 
-	public void setReceivingService(String receivingService) {
+	public void setReceivingService(ReceivingService receivingService) {
 		this.receivingService = receivingService;
+	}
+
+	public ReceivingHospital getRecvHosptial() {
+		return recvHosptial;
+	}
+
+	public void setRecvHosptial(ReceivingHospital recvHosptial) {
+		this.recvHosptial = recvHosptial;
 	}
 
 }
