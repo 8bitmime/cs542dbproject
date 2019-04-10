@@ -2,6 +2,7 @@ package database;
 
 import java.sql.*;
 
+import model.Call;
 import model.Location;
 import model.Outcome;
 import model.ReceivingHospital;
@@ -25,7 +26,7 @@ public class dbWriter {
 
 	}
 
-	public boolean inserTypeCall(TypeofCall call) throws Exception {
+	public boolean inserCall(Call call) throws Exception {
 		try {
 
 			PreparedStatement ps = conn
@@ -46,9 +47,14 @@ public class dbWriter {
     	int generatedKey = 0;
         try {
         	
-        	PreparedStatement ps = conn.prepareStatement("INSERT INTO loc (location_id ,room_number,street_num,street_name,type_l,name_l) values(seq_locid.nextval,?,?,?,?,?);",Statement.RETURN_GENERATED_KEYS);
-            ps.setString(4,  location.getType());
-            ps.setString(5,  location.getName());
+        	PreparedStatement ps = conn.prepareStatement("INSERT INTO loc (location_id ,loc_name,addr,loc_type) values(seq_locid.nextval,?,?,?);",Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1,  location.getName());
+            ps.setString(2,  location.getAddress());
+            //confirm the type
+            ps.setString(3,  location.getName());
+
+
+
             ps.execute();
             PreparedStatement statement = conn.prepareStatement("select seq_locid.currval from dual");
             ResultSet rs = statement.executeQuery();
@@ -66,18 +72,6 @@ public class dbWriter {
 	public int insertOutcome(Outcome outcome) throws Exception {
 		int generatedKey = 0;
 		try {
-			// PreparedStatement ps =
-			// conn.prepareStatement("SELECT * FROM Constants WHERE name = ?;");
-			// ps.setString(1, location.getName());
-			// ResultSet resultSet = ps.executeQuery();
-			//
-			// // already present?
-			// while (resultSet.next()) {
-			// Constant c = generateConstant(resultSet);
-			// resultSet.close();
-			// return false;
-			// }
-
 			PreparedStatement ps = conn
 					.prepareStatement(
 							"INSERT INTO outcome (outcome_id ,oresult, recieving_service, recieving_hospital) values(seq_outcomeid.nextval,?,?,?);",
@@ -207,14 +201,69 @@ public class dbWriter {
 	}
 	
 	public int insertRecvServcie(ReceivingService recvService) throws Exception {
-		
-		return 0;
+		int generatedKey = 0;
+		try {
+			// PreparedStatement ps =
+			// conn.prepareStatement("SELECT * FROM Constants WHERE name = ?;");
+			// ps.setString(1, location.getName());
+			// ResultSet resultSet = ps.executeQuery();
+			//
+			// // already present?
+			// while (resultSet.next()) {
+			// Constant c = generateConstant(resultSet);
+			// resultSet.close();
+			// return false;
+			// }
+
+			PreparedStatement ps = conn
+					.prepareStatement("INSERT INTO time_t (time_t, type_t) values(?,?);");
+			ps.setTimestamp(1, time.getTime());
+			ps.setString(2, time.getTimeType());
+			ps.execute();
+			
+			PreparedStatement statement = conn.prepareStatement("select seq_staffid.currval from dual");
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+            	generatedKey = (int) rs.getLong(1);
+            }
+            System.out.println("Inserted record's ID: " + generatedKey);
+            
+		} catch (Exception e) {
+			throw new Exception("Failed to insert constant: " + e.getMessage());
+		}
+		return generatedKey;
 	}
 	
 	public int insertTypeofEvent(TypeofEvent typeEvent) throws Exception {
 		
-		return 0;
-	}
-	
-	
+		int generatedKey = 0;
+		try {
+			// PreparedStatement ps =
+			// conn.prepareStatement("SELECT * FROM Constants WHERE name = ?;");
+			// ps.setString(1, location.getName());
+			// ResultSet resultSet = ps.executeQuery();
+			//
+			// // already present?
+			// while (resultSet.next()) {
+			// Constant c = generateConstant(resultSet);
+			// resultSet.close();
+			// return false;
+			// }
+
+			PreparedStatement ps = conn
+					.prepareStatement("INSERT INTO time_t (time_t, type_t) values(?,?);");
+			ps.setTimestamp(1, time.getTime());
+			ps.setString(2, time.getTimeType());
+			ps.execute();
+			
+			PreparedStatement statement = conn.prepareStatement("select seq_staffid.currval from dual");
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+            	generatedKey = (int) rs.getLong(1);
+            }
+            System.out.println("Inserted record's ID: " + generatedKey);
+            
+		} catch (Exception e) {
+			throw new Exception("Failed to insert constant: " + e.getMessage());
+		}
 }
