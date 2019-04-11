@@ -74,7 +74,7 @@ public class dbReader {
 				String hospital_name  = hosResult.getString("hospital_name");
 				String location_id = hosResult.getString("location_id");
 				
-				ReceivingHospital recvHosptial = new ReceivingHospital(hospitalID,hospitalName,location)
+				ReceivingHospital recvHosptial = new ReceivingHospital(hospitalID,hospitalName,location);
 				Outcome outcome = new Outcome(outcomeID, result,
 						receivingService, recvHosptial);
 				allOutcome.add(outcome);

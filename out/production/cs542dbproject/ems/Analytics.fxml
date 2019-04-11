@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.Analytics_Controller">
+   <center>
+      <VBox prefHeight="430.0" prefWidth="640.0">
+          <children>
+              <MenuBar VBox.vgrow="NEVER">
+                  <menus>
+                      <Menu mnemonicParsing="false" text="File">
+                          <items>
+                              <MenuItem fx:id="reportCallMenu" mnemonicParsing="false" onAction="#goReportCall" text="Report A Call" />
+                        <MenuItem fx:id="uploadFileMenu" mnemonicParsing="false" onAction="#goUploadFile" text="Upload File" />
+                              <MenuItem fx:id="analyticsMenu" mnemonicParsing="false" onAction="#goAnalytics" text="Analytics" />
+                              <Menu mnemonicParsing="false" text="Add New...">
+                           <items>
+                                    <MenuItem fx:id="newLocationMenu" mnemonicParsing="false" onAction="#goNewLocation" text="Location Type" />
+                                    <MenuItem fx:id="newOutcomeMenu" mnemonicParsing="false" onAction="#goNewOutcome" text="Outcome" />
+                                    <MenuItem fx:id="newServiceMenu" mnemonicParsing="false" onAction="#goNewService" text="Service" />
+                                    <MenuItem fx:id="newHospitalMenu" mnemonicParsing="false" onAction="#goNewHospital" text="Hospital" />
+                                    <MenuItem fx:id="newCallTypeMenu" mnemonicParsing="false" onAction="#goNewCall" text="Type of Call" />
+                              <MenuItem fx:id="newCrewMenu" mnemonicParsing="false" onAction="#goNewCrew" text="Crew Member" />
+                           </items></Menu>
+                              <SeparatorMenuItem mnemonicParsing="false" />
+                              <MenuItem fx:id="quitMenu" mnemonicParsing="false" onAction="#goQuit" text="Quit" />
+                          </items>
+                      </Menu>
+                      <Menu mnemonicParsing="false" text="Edit">
+                          <items>
+                              <MenuItem fx:id="editCrewMenu" mnemonicParsing="false" onAction="#goEditCrew" text="Crew Member" />
+                          </items>
+                      </Menu>
+                      <Menu mnemonicParsing="false" text="Help">
+                          <items>
+                              <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+                          </items>
+                      </Menu>
+                  </menus>
+              </MenuBar>
+              <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+                  <children>
+                      <Label layoutX="20.0" layoutY="19.0" text="Analytics" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
+                          <font>
+                              <Font name="System Bold" size="18.0" />
+                          </font>
+                      </Label>
+                      <Separator layoutX="122.0" layoutY="32.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="33.0" />
+                  </children>
+              </AnchorPane>
+          </children>
+      </VBox>
+   </center>
+</BorderPane>

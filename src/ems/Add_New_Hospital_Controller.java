@@ -110,6 +110,11 @@ public class Add_New_Hospital_Controller {
         String input = hospitalName.getText();
         mainVar.showReportCallSceneWithPassedHospitalData(input);
 
+        String street = streetName.getText();
+        String num = streetNum.getText();
+
+
+
         hospitalName.clear();
     }
 

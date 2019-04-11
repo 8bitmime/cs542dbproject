@@ -104,6 +104,9 @@ public class Add_New_Call_Controller {
         String input = callType.getText();
         mainVar.showReportCallSceneWithPassedCallTypeData(input);
 
+        // call the insert statement
+
+
         callType.clear();
     }
 

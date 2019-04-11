@@ -109,6 +109,16 @@ public class Add_New_Crew_Controller {
     // called when submit button is clicked
     public void addToDatabase() {
         // DATABASE STUFF
+        String name = nameBox.getText();
+
+        //must convert date using something like this
+        // INSERT INTO t(dob) VALUES(TO_DATE('17/12/2015', 'MM/DD/YYYY'));
+        String date = dobBox.getText();
+
+        System.out.println(date);
+
+
+
     }
 
 }
