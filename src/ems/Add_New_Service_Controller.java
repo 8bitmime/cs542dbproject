@@ -7,6 +7,9 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
+import model.ReceivingService;
+import database.dbWriter;
+
 public class Add_New_Service_Controller {
 
     @FXML
@@ -103,8 +106,16 @@ public class Add_New_Service_Controller {
         // DATABASE STUFF
 
         String input = serviceName.getText();
+        dbWriter writer = new dbWriter();
+        ReceivingService service = new ReceivingService(input);
+        try {
+			writer.insertService(service);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("insert service error" + e.getMessage());
+		}
+        
         mainVar.showReportCallSceneWithPassedServiceData(input);
-
         serviceName.clear();
     }
 

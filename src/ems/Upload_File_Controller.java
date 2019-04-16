@@ -11,9 +11,15 @@ import javafx.stage.FileChooser;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import model.Call;
+import cs542dbproject.CSVPaser;
+import database.dbWriter;
 
 public class Upload_File_Controller {
 
@@ -116,10 +122,46 @@ public class Upload_File_Controller {
         if (f != null) {
             filePath.setText(f.getAbsolutePath());
         }
+        
+		
     }
 
     // called when upload button is clicked
     public void addToDatabase() {
         // DATABASE STUFF
+    	
+    	CSVPaser csvPaser = new CSVPaser(filePath.getText());
+		List<String[]> records = null;
+		try {
+			records = csvPaser.readCSV();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		int rollCount = 0;
+		List<Call> calls = null;
+		try {
+			rollCount = csvPaser.buildModel(records);
+			calls = csvPaser.getCallList();
+			
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		System.out.println("Number of line have been parsed: "+rollCount);
+		
+		dbWriter writter = new dbWriter();
+	
+		for(Call call:calls){
+			
+			try {
+				writter.inserCall(call);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
     }
 }

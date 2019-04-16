@@ -2,11 +2,11 @@ package model;
 
 public class Location {
 	private int locationID;
-	private LocationType type;
+	private String type;
 	private String name;
 	private String address;
 
-	public Location(int locationID, LocationType type, String name,
+	public Location(int locationID, String type, String name,
 			String address) {
 		this.locationID = locationID;
 		this.type = type;
@@ -14,7 +14,7 @@ public class Location {
 		this.address = address;
 	}
 	
-	public Location(LocationType type, String name,
+	public Location(String type, String name,
 			String address) {
 		this.type = type;
 		this.name = name;
@@ -29,11 +29,11 @@ public class Location {
 		this.locationID = locationID;
 	}
 
-	public LocationType getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(LocationType type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 

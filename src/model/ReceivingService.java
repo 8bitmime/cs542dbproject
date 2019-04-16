@@ -3,8 +3,10 @@ package model;
 public class ReceivingService {
 	private int id;
 	private String name;
+
 	
-	public ReceivingService(int id, String name) {
+	public ReceivingService(int id, String name ) {
+		super();
 		this.id = id;
 		this.name = name;
 	}

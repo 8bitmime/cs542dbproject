@@ -4,14 +4,14 @@ import java.util.List;
 
 public class Call {
 	private int callID;
-	private TypeofEvent reported;
-	private TypeofEvent actural;
+	private String reported;
+	private String actural;
 	private Outcome outcome;
 	private List<TTime> timeList;
 	private List<Staff> staffList;
 	private Location location;
 
-	public Call(int callID, TypeofEvent reported, TypeofEvent actural,
+	public Call(int callID, String reported, String actural,
 			Outcome outcome, List<TTime> timeList, List<Staff> staffList,
 			Location location) {
 		this.callID = callID;
@@ -23,7 +23,7 @@ public class Call {
 		this.location = location;
 	}
 
-	public Call(TypeofEvent reported, TypeofEvent actural, Outcome outcome,
+	public Call(String reported, String actural, Outcome outcome,
 			List<TTime> timeList, List<Staff> staffList, Location location) {
 
 		this.reported = reported;
@@ -42,19 +42,19 @@ public class Call {
 		this.callID = callID;
 	}
 
-	public TypeofEvent getReported() {
+	public String getReported() {
 		return reported;
 	}
 
-	public void setReported(TypeofEvent reported) {
+	public void setReported(String reported) {
 		this.reported = reported;
 	}
 
-	public TypeofEvent getActural() {
+	public String getActural() {
 		return actural;
 	}
 
-	public void setActural(TypeofEvent actural) {
+	public void setActural(String actural) {
 		this.actural = actural;
 	}
 

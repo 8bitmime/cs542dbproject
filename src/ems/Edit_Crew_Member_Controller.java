@@ -6,6 +6,13 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
+import model.Staff;
+import util.DateConverter;
+import database.dbReader;
 
 public class Edit_Crew_Member_Controller {
 
@@ -126,6 +133,17 @@ public class Edit_Crew_Member_Controller {
     // called when look up submit button is clicked
     public void addLookUpToDatabase() {
         // DATABASE STUFF
+    	dbReader reader = new dbReader();
+    	List<Staff> result = new ArrayList<>();
+    	Timestamp bod = DateConverter.converBod(dobLookUp.getText());
+    	try {
+			result = reader.getStaff(nameLookUp.getText(), bod);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("look up failed "+e);
+		}
+		System.out.println("look up success "+result.size());
+
     }
 
     // called when edit submit button is clicked

@@ -3,17 +3,17 @@ package model;
 public class ReceivingHospital {
 	private int hospitalID;
 	private String hospitalName;
-	private String hospitalAddress;
+	private Location hospitalAddress;
 	
 	public ReceivingHospital(int hospitalID, String hospitalName,
-			String hospitalAddress) {
+			Location hospitalAddress) {
 		this.hospitalID = hospitalID;
 		this.hospitalName = hospitalName;
 		this.hospitalAddress = hospitalAddress;
 	}
 	
 	public ReceivingHospital(String hospitalName,
-			String hospitalAddress) {
+			Location hospitalAddress) {
 		this.hospitalName = hospitalName;
 		this.hospitalAddress = hospitalAddress;
 	}
@@ -34,11 +34,11 @@ public class ReceivingHospital {
 		this.hospitalName = hospitalName;
 	}
 
-	public String getHospitalAddress() {
+	public Location getHospitalAddress() {
 		return hospitalAddress;
 	}
 
-	public void setHospitalAddress(String hospitalAddress) {
+	public void setHospitalAddress(Location hospitalAddress) {
 		this.hospitalAddress = hospitalAddress;
 	}
 	

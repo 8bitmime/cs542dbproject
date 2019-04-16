@@ -20,17 +20,14 @@ import model.ReceivingHospital;
 import model.ReceivingService;
 import model.Staff;
 import model.TTime;
-import model.TypeofEvent;
 import util.DateConverter;
 import util.Setting;
 
 public class CSVPaser {
 	private String filePath = null;
 
-	private List<TTime> timeList;
 	private List<Location> locationList;
 	private List<ReceivingHospital> recvHospList;
-	private List<Staff> staffList;
 	private List<Call> CallList;
 
 	/**
@@ -40,11 +37,6 @@ public class CSVPaser {
 	 */
 	public CSVPaser(String filePath) {
 		this.filePath = filePath;
-
-		this.timeList = new ArrayList<TTime>();
-		this.locationList = new ArrayList<Location>();
-		this.recvHospList = new ArrayList<ReceivingHospital>();
-		this.staffList = new ArrayList<Staff>();
 		this.CallList = new ArrayList<Call>();
 
 	}
@@ -77,6 +69,7 @@ public class CSVPaser {
 	public int buildModel(List<String[]> records) throws ParseException {
 		int checkCount = 0;
 		for (String[] record : records) {
+			List<TTime> timeList = new ArrayList<TTime>();
 			//populate time records
 			TTime dispatched = new TTime(DateConverter.converDate(record[0]), Setting.CSV_FORMATE[0]);
 			TTime Enrout = new TTime(DateConverter.converDate(record[1]), Setting.CSV_FORMATE[1]);
@@ -93,31 +86,35 @@ public class CSVPaser {
 			timeList.add(eaArrived);
 			timeList.add(eaClear);
 			//end time records
-			
-			ReceivingHospital recvHospital = new ReceivingHospital(record[8],null);
+			Location hospLoc = new Location("Hospital","","");
+			ReceivingHospital recvHospital = new ReceivingHospital(record[8],hospLoc);
 			ReceivingService recvService  = new ReceivingService(record[10]);
 			Outcome outCome = new Outcome (record[9],recvService, recvHospital);
-			Location location = new Location(null,record[15],record[19]);
 			
+			Location location = new Location(record[15],"",record[19]);
 			//populate Staff
 			Staff staff1 = new Staff( record[11], processBadgeID(record[16]));
 			Staff staff2 = new Staff( record[12], processBadgeID(record[17]));
 			Staff staff3 = new Staff( record[13], processBadgeID(record[18]));
+			List<Staff> staffList = new ArrayList<Staff>();
 			staffList.add(staff1);
 			staffList.add(staff2);
 			staffList.add(staff3);
-			TypeofEvent reportEvent = new TypeofEvent(record[7]);
-			TypeofEvent actualEvent = new TypeofEvent(record[14]);
-			Call call = new Call(reportEvent, actualEvent, outCome, timeList, staffList, location);
+			Call call = new Call(record[7], record[14], outCome, timeList, staffList, location);
 			CallList.add(call);
 			checkCount++;
 		}
 		return checkCount;
 	}
 	
+	
+	
+	public List<Call> getCallList() {
+		return CallList;
+	}
+
 	private int processBadgeID(String badgeID){
 		int bID = 0;
-	
 		try{
 			bID = Integer.parseInt(badgeID);
 		}catch(Exception ex){
