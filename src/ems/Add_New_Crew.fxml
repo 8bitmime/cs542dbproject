@@ -26,11 +26,8 @@
                         <MenuItem fx:id="analyticsMenu" mnemonicParsing="false" onAction="#goAnalytics" text="Analytics" />
                               <Menu mnemonicParsing="false" text="Add New...">
                            <items>
-                                    <MenuItem fx:id="newLocationMenu" mnemonicParsing="false" onAction="#goNewLocation" text="Location Type" />
-                                    <MenuItem fx:id="newOutcomeMenu" mnemonicParsing="false" onAction="#goNewOutcome" text="Outcome" />
                                     <MenuItem fx:id="newServiceMenu" mnemonicParsing="false" onAction="#goNewService" text="Service" />
                                     <MenuItem fx:id="newHospitalMenu" mnemonicParsing="false" onAction="#goNewHospital" text="Hospital" />
-                                    <MenuItem fx:id="newCallTypeMenu" mnemonicParsing="false" onAction="#goNewCall" text="Type of Call" />
                               <MenuItem fx:id="newCrewMenu" mnemonicParsing="false" onAction="#goNewCrew" text="Crew Member" />
                            </items></Menu>
                               <SeparatorMenuItem mnemonicParsing="false" />
@@ -40,11 +37,6 @@
                       <Menu mnemonicParsing="false" text="Edit">
                           <items>
                               <MenuItem fx:id="editCrewMenu" mnemonicParsing="false" onAction="#goEditCrew" text="Crew Menu" />
-                          </items>
-                      </Menu>
-                      <Menu mnemonicParsing="false" text="Help">
-                          <items>
-                              <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
                           </items>
                       </Menu>
                   </menus>
@@ -58,15 +50,13 @@
                       </Label>
                       <Separator layoutX="81.0" layoutY="42.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="33.0" />
                       <Label layoutX="17.0" layoutY="46.0" text="Name" AnchorPane.leftAnchor="10.0" />
-                      <TextField fx:id="nameBox" layoutX="127.0" layoutY="42.0" AnchorPane.leftAnchor="120.0" />
+                      <TextField fx:id="nameBox" layoutX="127.0" layoutY="42.0" promptText="Ex. John Doe" AnchorPane.leftAnchor="120.0" />
                       <Label layoutX="19.0" layoutY="80.0" text="Date of Birth" AnchorPane.leftAnchor="10.0" />
-                      <TextField fx:id="dobBox" layoutX="129.0" layoutY="76.0" AnchorPane.leftAnchor="120.0" />
+                      <TextField fx:id="dobBox" layoutX="129.0" layoutY="76.0" promptText="Ex. MM/DD/YYYY" AnchorPane.leftAnchor="120.0" />
                       <Label layoutX="16.0" layoutY="116.0" text="Badge ID" AnchorPane.leftAnchor="10.0" />
-                      <TextField fx:id="badgeIDBox" layoutX="126.0" layoutY="112.0" AnchorPane.leftAnchor="120.0" />
-                      <Label layoutX="18.0" layoutY="150.0" text="Staff ID" AnchorPane.leftAnchor="10.0" />
-                      <TextField fx:id="staffIDBox" layoutX="128.0" layoutY="146.0" AnchorPane.leftAnchor="120.0" />
-                      <Button fx:id="submitButton" layoutX="39.0" layoutY="207.0" mnemonicParsing="false" onAction="#addToDatabase" text="Submit" />
-                      <Button fx:id="clearButton" layoutX="173.0" layoutY="208.0" mnemonicParsing="false" onAction="#clearFields" text="Clear" />
+                      <TextField fx:id="badgeIDBox" layoutX="126.0" layoutY="112.0" promptText="Ex. 99" AnchorPane.leftAnchor="120.0" />
+                      <Button fx:id="submitButton" layoutX="42.0" layoutY="156.0" mnemonicParsing="false" onAction="#addToDatabase" text="Submit" />
+                      <Button fx:id="clearButton" layoutX="176.0" layoutY="157.0" mnemonicParsing="false" onAction="#clearFields" text="Clear" />
                   </children>
               </AnchorPane>
           </children>

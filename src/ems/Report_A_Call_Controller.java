@@ -43,41 +43,23 @@ public class Report_A_Call_Controller implements Initializable {
     @FXML
     private TextField badgeIDField3;
     @FXML
-    private DatePicker timeEnrouteDate1;
+    private DatePicker staffDispatchedDate;
     @FXML
-    private ComboBox<String> timeEnrouteHour1;
+    private ComboBox<String> staffDispatchedHour;
     @FXML
-    private ComboBox<String> timeEnrouteMin1;
+    private ComboBox<String> staffDispatchedMin;
     @FXML
-    private DatePicker timeEnrouteDate2;
+    private DatePicker staffArrivedDate;
     @FXML
-    private ComboBox<String> timeEnrouteHour2;
+    private ComboBox<String> staffArrivedHour;
     @FXML
-    private ComboBox<String> timeEnrouteMin2;
+    private ComboBox<String> staffArrivedMin;
     @FXML
-    private DatePicker timeEnrouteDate3;
+    private DatePicker staffClearedDate;
     @FXML
-    private ComboBox<String> timeEnrouteHour3;
+    private ComboBox<String> staffClearedHour;
     @FXML
-    private ComboBox<String> timeEnrouteMin3;
-    @FXML
-    private DatePicker timeArrivedDate1;
-    @FXML
-    private ComboBox<String> timeArrivedHour1;
-    @FXML
-    private ComboBox<String> timeArrivedMin1;
-    @FXML
-    private DatePicker timeArrivedDate2;
-    @FXML
-    private ComboBox<String> timeArrivedHour2;
-    @FXML
-    private ComboBox<String> timeArrivedMin2;
-    @FXML
-    private DatePicker timeArrivedDate3;
-    @FXML
-    private ComboBox<String> timeArrivedHour3;
-    @FXML
-    private ComboBox<String> timeArrivedMin3;
+    private ComboBox<String> staffClearedMin;
 
     @FXML
     private DatePicker callTimeDate;
@@ -131,15 +113,9 @@ public class Report_A_Call_Controller implements Initializable {
     @FXML
     private MenuItem analyticsMenu;
     @FXML
-    private MenuItem addLocationTypeMenu;
-    @FXML
-    private MenuItem addOutcomeMenu;
-    @FXML
     private MenuItem addServiceMenu;
     @FXML
     private MenuItem addHospitalMenu;
-    @FXML
-    private MenuItem addCallTypeMenu;
     @FXML
     private MenuItem addCrewMenu;
     @FXML
@@ -169,42 +145,6 @@ public class Report_A_Call_Controller implements Initializable {
         callLocationType.setValue("Residential");
         callLocationType.setItems(locationTypeList);
 
-        timeEnrouteHour1.setValue("00");
-        timeEnrouteHour1.setItems(hourList);
-
-        timeEnrouteMin1.setValue("00");
-        timeEnrouteMin1.setItems(minList);
-
-        timeEnrouteHour2.setValue("00");
-        timeEnrouteHour2.setItems(hourList);
-
-        timeEnrouteMin2.setValue("00");
-        timeEnrouteMin2.setItems(minList);
-
-        timeEnrouteHour3.setValue("00");
-        timeEnrouteHour3.setItems(hourList);
-
-        timeEnrouteMin3.setValue("00");
-        timeEnrouteMin3.setItems(minList);
-
-        timeArrivedHour1.setValue("00");
-        timeArrivedHour1.setItems(hourList);
-
-        timeArrivedMin1.setValue("00");
-        timeArrivedMin1.setItems(minList);
-
-        timeArrivedHour2.setValue("00");
-        timeArrivedHour2.setItems(hourList);
-
-        timeArrivedMin2.setValue("00");
-        timeArrivedMin2.setItems(minList);
-
-        timeArrivedHour3.setValue("00");
-        timeArrivedHour3.setItems(hourList);
-
-        timeArrivedMin3.setValue("00");
-        timeArrivedMin3.setItems(minList);
-
         callTimeHour.setValue("00");
         callTimeHour.setItems(hourList);
 
@@ -229,6 +169,24 @@ public class Report_A_Call_Controller implements Initializable {
         ambClearedMin.setValue("00");
         ambClearedMin.setItems(minList);
 
+        staffDispatchedHour.setValue("00");
+        staffDispatchedHour.setItems(hourList);
+
+        staffDispatchedMin.setValue("00");
+        staffDispatchedMin.setItems(minList);
+
+        staffArrivedHour.setValue("00");
+        staffArrivedHour.setItems(hourList);
+
+        staffArrivedMin.setValue("00");
+        staffArrivedMin.setItems(minList);
+
+        staffClearedHour.setValue("00");
+        staffClearedHour.setItems(hourList);
+
+        staffClearedMin.setValue("00");
+        staffClearedMin.setItems(minList);
+
     }
 
     // to access methods in main class
@@ -244,11 +202,6 @@ public class Report_A_Call_Controller implements Initializable {
         mainVar.showEditCrewScene();
     }
 
-    // open the add new call type scene
-    public void goNewCall() throws IOException {
-        mainVar.showNewCallScene();
-    }
-
     // open the add new crew scene
     public void goNewCrew() throws IOException {
         mainVar.showNewCrewScene();
@@ -257,16 +210,6 @@ public class Report_A_Call_Controller implements Initializable {
     // open the add new hospital scene
     public void goNewHospital() throws IOException {
         mainVar.showNewHospitalScene();
-    }
-
-    // open the add new location scene
-    public void goNewLocation() throws IOException {
-        mainVar.showNewLocationScene();
-    }
-
-    // open the add new outcome scene
-    public void goNewOutcome() throws IOException {
-        mainVar.showNewOutcomeScene();
     }
 
     // open the add new service scene
@@ -289,30 +232,12 @@ public class Report_A_Call_Controller implements Initializable {
     public void clearFields() {
         nameField1.clear();
         badgeIDField1.clear();
-        timeEnrouteDate1.setValue(null);
-        timeEnrouteHour1.setValue("00");
-        timeEnrouteMin1.setValue("00");
-        timeArrivedDate1.setValue(null);
-        timeArrivedHour1.setValue("00");
-        timeArrivedMin1.setValue("00");
 
         nameField2.clear();
         badgeIDField2.clear();
-        timeEnrouteDate2.setValue(null);
-        timeEnrouteHour2.setValue("00");
-        timeEnrouteMin2.setValue("00");
-        timeArrivedDate2.setValue(null);
-        timeArrivedHour2.setValue("00");
-        timeArrivedMin2.setValue("00");
 
         nameField3.clear();
         badgeIDField3.clear();
-        timeEnrouteDate3.setValue(null);
-        timeEnrouteHour3.setValue("00");
-        timeEnrouteMin3.setValue("00");
-        timeArrivedDate3.setValue(null);
-        timeArrivedHour3.setValue("00");
-        timeArrivedMin3.setValue("00");
 
         callTimeDate.setValue(null);
         callTimeHour.setValue("00");
@@ -335,6 +260,16 @@ public class Report_A_Call_Controller implements Initializable {
         ambClearedDate.setValue(null);
         ambClearedHour.setValue("00");
         ambClearedMin.setValue("00");
+
+        staffDispatchedDate.setValue(null);
+        staffDispatchedHour.setValue("00");
+        staffDispatchedMin.setValue("00");
+        staffArrivedDate.setValue(null);
+        staffArrivedHour.setValue("00");
+        staffArrivedMin.setValue("00");
+        staffClearedDate.setValue(null);
+        staffClearedHour.setValue("00");
+        staffClearedMin.setValue("00");
     }
 
     // add new location from user input
@@ -365,6 +300,9 @@ public class Report_A_Call_Controller implements Initializable {
     // called when submit button is clicked
     public void addToDatabase() {
         // DATABASE STUFF
+
+        // clear all the fields after submission
+        clearFields();
     }
 
 }

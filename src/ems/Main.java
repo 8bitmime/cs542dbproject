@@ -56,14 +56,6 @@ public class Main extends Application {
         mainLayout.setCenter(editCrew);
     }
 
-    // open add new call type UI
-    public static void showNewCallScene() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource("Add_New_Call.fxml"));
-        BorderPane newCall = loader.load();
-        mainLayout.setCenter(newCall);
-    }
-
     // open add new crew UI
     public static void showNewCrewScene() throws IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -78,22 +70,6 @@ public class Main extends Application {
         loader.setLocation(Main.class.getResource("Add_New_Hospital.fxml"));
         BorderPane newHospital = loader.load();
         mainLayout.setCenter(newHospital);
-    }
-
-    // open add new location UI
-    public static void showNewLocationScene() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource("Add_New_Location.fxml"));
-        BorderPane newLocation = loader.load();
-        mainLayout.setCenter(newLocation);
-    }
-
-    // open add new outcome UI
-    public static void showNewOutcomeScene() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource("Add_New_Outcome.fxml"));
-        BorderPane newOutcome = loader.load();
-        mainLayout.setCenter(newOutcome);
     }
 
     // open add new service UI
@@ -176,11 +152,6 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-    	
-    	
-    	
         launch(args);
-        
-        
     }
 }

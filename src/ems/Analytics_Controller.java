@@ -1,13 +1,20 @@
 package ems;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class Analytics_Controller {
+public class Analytics_Controller implements Initializable {
+
+    private WebEngine engine;
 
     @FXML
     private MenuItem reportCallMenu;
@@ -16,22 +23,17 @@ public class Analytics_Controller {
     @FXML
     private MenuItem analyticsMenu;
     @FXML
-    private MenuItem newLocationMenu;
-    @FXML
-    private MenuItem newOutcomeMenu;
-    @FXML
     private MenuItem newServiceMenu;
     @FXML
     private MenuItem newHospitalMenu;
-    @FXML
-    private MenuItem newCallTypeMenu;
     @FXML
     private MenuItem newCrewMenu;
     @FXML
     private MenuItem quitMenu;
     @FXML
     private MenuItem editCrewMenu;
-
+    @FXML
+    private WebView webView;
 
 
     // to access methods in main class
@@ -47,11 +49,6 @@ public class Analytics_Controller {
         mainVar.showEditCrewScene();
     }
 
-    // open the add new call type scene
-    public void goNewCall() throws IOException {
-        mainVar.showNewCallScene();
-    }
-
     // open the add new crew scene
     public void goNewCrew() throws IOException {
         mainVar.showNewCrewScene();
@@ -60,16 +57,6 @@ public class Analytics_Controller {
     // open the add new hospital scene
     public void goNewHospital() throws IOException {
         mainVar.showNewHospitalScene();
-    }
-
-    // open the add new location scene
-    public void goNewLocation() throws IOException {
-        mainVar.showNewLocationScene();
-    }
-
-    // open the add new outcome scene
-    public void goNewOutcome() throws IOException {
-        mainVar.showNewOutcomeScene();
     }
 
     // open the add new service scene
@@ -89,4 +76,9 @@ public class Analytics_Controller {
         mainVar.showAnalyticsScene();
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        engine = webView.getEngine();
+        engine.load("https://public.tableau.com/profile/andrew1422#!/vizhome/Book1_15549130713440/Sheet1");
+    }
 }

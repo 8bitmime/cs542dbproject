@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
 
 <BorderPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.Analytics_Controller">
    <center>
@@ -24,11 +25,8 @@
                               <MenuItem fx:id="analyticsMenu" mnemonicParsing="false" onAction="#goAnalytics" text="Analytics" />
                               <Menu mnemonicParsing="false" text="Add New...">
                            <items>
-                                    <MenuItem fx:id="newLocationMenu" mnemonicParsing="false" onAction="#goNewLocation" text="Location Type" />
-                                    <MenuItem fx:id="newOutcomeMenu" mnemonicParsing="false" onAction="#goNewOutcome" text="Outcome" />
                                     <MenuItem fx:id="newServiceMenu" mnemonicParsing="false" onAction="#goNewService" text="Service" />
                                     <MenuItem fx:id="newHospitalMenu" mnemonicParsing="false" onAction="#goNewHospital" text="Hospital" />
-                                    <MenuItem fx:id="newCallTypeMenu" mnemonicParsing="false" onAction="#goNewCall" text="Type of Call" />
                               <MenuItem fx:id="newCrewMenu" mnemonicParsing="false" onAction="#goNewCrew" text="Crew Member" />
                            </items></Menu>
                               <SeparatorMenuItem mnemonicParsing="false" />
@@ -38,11 +36,6 @@
                       <Menu mnemonicParsing="false" text="Edit">
                           <items>
                               <MenuItem fx:id="editCrewMenu" mnemonicParsing="false" onAction="#goEditCrew" text="Crew Member" />
-                          </items>
-                      </Menu>
-                      <Menu mnemonicParsing="false" text="Help">
-                          <items>
-                              <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
                           </items>
                       </Menu>
                   </menus>
@@ -55,6 +48,7 @@
                           </font>
                       </Label>
                       <Separator layoutX="122.0" layoutY="32.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="33.0" />
+                  <WebView fx:id="webView" layoutX="13.0" layoutY="78.0" prefHeight="318.0" prefWidth="612.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0" />
                   </children>
               </AnchorPane>
           </children>

@@ -16,15 +16,9 @@ public class Add_New_Crew_Controller {
     @FXML
     private MenuItem analyticsMenu;
     @FXML
-    private MenuItem newLocationMenu;
-    @FXML
-    private MenuItem newOutcomeMenu;
-    @FXML
     private MenuItem newServiceMenu;
     @FXML
     private MenuItem newHospitalMenu;
-    @FXML
-    private MenuItem newCallTypeMenu;
     @FXML
     private MenuItem newCrewMenu;
     @FXML
@@ -37,8 +31,6 @@ public class Add_New_Crew_Controller {
     private TextField dobBox;
     @FXML
     private TextField badgeIDBox;
-    @FXML
-    private TextField staffIDBox;
     @FXML
     private Button submitButton;
     @FXML
@@ -57,11 +49,6 @@ public class Add_New_Crew_Controller {
         mainVar.showEditCrewScene();
     }
 
-    // open the add new call type scene
-    public void goNewCall() throws IOException {
-        mainVar.showNewCallScene();
-    }
-
     // open the add new crew scene
     public void goNewCrew() throws IOException {
         mainVar.showNewCrewScene();
@@ -70,16 +57,6 @@ public class Add_New_Crew_Controller {
     // open the add new hospital scene
     public void goNewHospital() throws IOException {
         mainVar.showNewHospitalScene();
-    }
-
-    // open the add new location scene
-    public void goNewLocation() throws IOException {
-        mainVar.showNewLocationScene();
-    }
-
-    // open the add new outcome scene
-    public void goNewOutcome() throws IOException {
-        mainVar.showNewOutcomeScene();
     }
 
     // open the add new service scene
@@ -103,12 +80,14 @@ public class Add_New_Crew_Controller {
         nameBox.clear();
         dobBox.clear();
         badgeIDBox.clear();
-        staffIDBox.clear();
     }
 
     // called when submit button is clicked
     public void addToDatabase() {
         // DATABASE STUFF
+
+        // clear all the fields after submission
+        clearFields();
     }
 
 }

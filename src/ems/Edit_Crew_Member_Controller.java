@@ -2,17 +2,11 @@ package ems;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-
-import model.Staff;
-import util.DateConverter;
-import database.dbReader;
 
 public class Edit_Crew_Member_Controller {
 
@@ -23,15 +17,9 @@ public class Edit_Crew_Member_Controller {
     @FXML
     private MenuItem analyticsMenu;
     @FXML
-    private MenuItem newLocationMenu;
-    @FXML
-    private MenuItem newOutcomeMenu;
-    @FXML
     private MenuItem newServiceMenu;
     @FXML
     private MenuItem newHospitalMenu;
-    @FXML
-    private MenuItem newCallTypeMenu;
     @FXML
     private MenuItem newCrewMenu;
     @FXML
@@ -58,9 +46,11 @@ public class Edit_Crew_Member_Controller {
     @FXML
     private Button submitEditButton;
     @FXML
-    private Button clearEditButton;
-    @FXML
     private Button deleteEditButton;
+    @FXML
+    private ListView<String> listView;
+    @FXML
+    private Button selectLookupButton;
 
 
     // to access methods in main class
@@ -76,11 +66,6 @@ public class Edit_Crew_Member_Controller {
         mainVar.showEditCrewScene();
     }
 
-    // open the add new call type scene
-    public void goNewCall() throws IOException {
-        mainVar.showNewCallScene();
-    }
-
     // open the add new crew scene
     public void goNewCrew() throws IOException {
         mainVar.showNewCrewScene();
@@ -89,16 +74,6 @@ public class Edit_Crew_Member_Controller {
     // open the add new hospital scene
     public void goNewHospital() throws IOException {
         mainVar.showNewHospitalScene();
-    }
-
-    // open the add new location scene
-    public void goNewLocation() throws IOException {
-        mainVar.showNewLocationScene();
-    }
-
-    // open the add new outcome scene
-    public void goNewOutcome() throws IOException {
-        mainVar.showNewOutcomeScene();
     }
 
     // open the add new service scene
@@ -133,27 +108,44 @@ public class Edit_Crew_Member_Controller {
     // called when look up submit button is clicked
     public void addLookUpToDatabase() {
         // DATABASE STUFF
-    	dbReader reader = new dbReader();
-    	List<Staff> result = new ArrayList<>();
-    	Timestamp bod = DateConverter.converBod(dobLookUp.getText());
-    	try {
-			result = reader.getStaff(nameLookUp.getText(), bod);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.out.println("look up failed "+e);
-		}
-		System.out.println("look up success "+result.size());
+
+        // This shows how to add things to the selectable list view
+        //Note, these will be set by whatever is in the database
+        listView.getItems().addAll("Rachel Hahn, 07/15/1997, 01, 15", "Rachel Hahn, 08/10/1996, 02, 16");
+
+    }
+
+    // called when look up submit button is clicked
+    public void selectLookUpToDatabase() {
+        // DATABASE STUFF
+
+        // This shows how to populate the edit textboxes
+        //Note, these will be set by whatever is the database
+        nameEdit.setText("Rachel Hahn");
+        dobEdit.setText("07/15/1997");
+        badgeIDEdit.setText("01");
+        staffIDEdit.setText("15");
 
     }
 
     // called when edit submit button is clicked
     public void addEditToDatabase() {
         // DATABASE STUFF
+
+        // clear all the fields after submission
+        clearEditFields();
+        clearLookUpFields();
+        listView.getItems().clear();
     }
 
     // called when delete button is clicked
     public void deleteFromDatabase() {
         // DATABASE STUFF
+
+        // clear all the fields after deletion
+        clearEditFields();
+        clearLookUpFields();
+        listView.getItems().clear();
     }
 
 }

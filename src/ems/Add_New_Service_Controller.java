@@ -7,9 +7,6 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
-import model.ReceivingService;
-import database.dbWriter;
-
 public class Add_New_Service_Controller {
 
     @FXML
@@ -19,15 +16,9 @@ public class Add_New_Service_Controller {
     @FXML
     private MenuItem analyticsMenu;
     @FXML
-    private MenuItem newLocationMenu;
-    @FXML
-    private MenuItem newOutcomeMenu;
-    @FXML
     private MenuItem newServiceMenu;
     @FXML
     private MenuItem newHospitalMenu;
-    @FXML
-    private MenuItem newCallTypeMenu;
     @FXML
     private MenuItem newCrewMenu;
     @FXML
@@ -55,11 +46,6 @@ public class Add_New_Service_Controller {
         mainVar.showEditCrewScene();
     }
 
-    // open the add new call type scene
-    public void goNewCall() throws IOException {
-        mainVar.showNewCallScene();
-    }
-
     // open the add new crew scene
     public void goNewCrew() throws IOException {
         mainVar.showNewCrewScene();
@@ -68,16 +54,6 @@ public class Add_New_Service_Controller {
     // open the add new hospital scene
     public void goNewHospital() throws IOException {
         mainVar.showNewHospitalScene();
-    }
-
-    // open the add new location scene
-    public void goNewLocation() throws IOException {
-        mainVar.showNewLocationScene();
-    }
-
-    // open the add new outcome scene
-    public void goNewOutcome() throws IOException {
-        mainVar.showNewOutcomeScene();
     }
 
     // open the add new service scene
@@ -106,17 +82,10 @@ public class Add_New_Service_Controller {
         // DATABASE STUFF
 
         String input = serviceName.getText();
-        dbWriter writer = new dbWriter();
-        ReceivingService service = new ReceivingService(input);
-        try {
-			writer.insertService(service);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.out.println("insert service error" + e.getMessage());
-		}
-        
         mainVar.showReportCallSceneWithPassedServiceData(input);
-        serviceName.clear();
+
+        // clear all the fields after submission
+        clearFields();
     }
 
 }

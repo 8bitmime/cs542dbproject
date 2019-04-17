@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -26,11 +27,8 @@
                               <MenuItem fx:id="analyticsMenu" mnemonicParsing="false" onAction="#goAnalytics" text="Analytics" />
                               <Menu mnemonicParsing="false" text="Add New...">
                            <items>
-                                    <MenuItem fx:id="newLocationMenu" mnemonicParsing="false" onAction="#goNewLocation" text="Location Type" />
-                                    <MenuItem fx:id="newOutcomeMenu" mnemonicParsing="false" onAction="#goNewOutcome" text="Outcome" />
                               <MenuItem fx:id="newServiceMenu" mnemonicParsing="false" onAction="#goNewService" text="Service" />
                                     <MenuItem fx:id="newHospitalMenu" mnemonicParsing="false" onAction="#goNewHospital" text="Hospital" />
-                                    <MenuItem fx:id="newCallTypeMenu" mnemonicParsing="false" onAction="#goNewCall" text="Type of Call" />
                                     <MenuItem fx:id="newCrewMenu" mnemonicParsing="false" onAction="#goNewCrew" text="Crew Member" />
                            </items></Menu>
                               <SeparatorMenuItem mnemonicParsing="false" />
@@ -40,11 +38,6 @@
                       <Menu mnemonicParsing="false" text="Edit">
                           <items>
                               <MenuItem fx:id="editCrewMenu" mnemonicParsing="false" onAction="#goEditCrew" text="Crew Member" />
-                          </items>
-                      </Menu>
-                      <Menu mnemonicParsing="false" text="Help">
-                          <items>
-                              <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
                           </items>
                       </Menu>
                   </menus>
@@ -64,9 +57,9 @@
                           </font>
                       </Label>
                       <Label layoutX="10.0" layoutY="46.0" text="Name" AnchorPane.leftAnchor="10.0" />
-                      <TextField fx:id="nameLookUp" layoutX="120.0" layoutY="42.0" AnchorPane.leftAnchor="120.0" />
+                      <TextField fx:id="nameLookUp" layoutX="120.0" layoutY="42.0" promptText="Ex. John Doe" AnchorPane.leftAnchor="120.0" />
                       <Label layoutX="12.0" layoutY="80.0" text="Date of Birth" AnchorPane.leftAnchor="10.0" />
-                      <TextField fx:id="dobLookUp" layoutX="122.0" layoutY="76.0" AnchorPane.leftAnchor="120.0" />
+                      <TextField fx:id="dobLookUp" layoutX="122.0" layoutY="76.0" promptText="Ex. MM/DD/YYYY" AnchorPane.leftAnchor="120.0" />
                       <Button fx:id="submitLookUpButton" layoutX="48.0" layoutY="126.0" mnemonicParsing="false" onAction="#addLookUpToDatabase" text="Submit" />
                       <Button fx:id="clearLookUpButton" layoutX="186.0" layoutY="125.0" mnemonicParsing="false" onAction="#clearLookUpFields" text="Clear" />
                       <Label layoutX="336.0" layoutY="48.0" text="Name" AnchorPane.leftAnchor="330.0" />
@@ -77,9 +70,10 @@
                       <TextField fx:id="badgeIDEdit" layoutX="445.0" layoutY="114.0" AnchorPane.leftAnchor="440.0" />
                       <Label layoutX="337.0" layoutY="152.0" text="Staff ID" AnchorPane.leftAnchor="330.0" />
                       <TextField fx:id="staffIDEdit" layoutX="447.0" layoutY="148.0" AnchorPane.leftAnchor="440.0" />
-                      <Button fx:id="submitEditButton" layoutX="383.0" layoutY="214.0" mnemonicParsing="false" onAction="#addEditToDatabase" text="Submit" />
-                      <Button fx:id="clearEditButton" layoutX="517.0" layoutY="215.0" mnemonicParsing="false" onAction="#clearEditFields" text="Clear" />
-                      <Button fx:id="deleteEditButton" layoutX="413.0" layoutY="299.0" mnemonicParsing="false" onAction="#deleteFromDatabase" text="Delete Crew Member" />
+                      <Button fx:id="submitEditButton" layoutX="364.0" layoutY="214.0" mnemonicParsing="false" onAction="#addEditToDatabase" text="Submit" />
+                      <Button fx:id="deleteEditButton" layoutX="460.0" layoutY="214.0" mnemonicParsing="false" onAction="#deleteFromDatabase" text="Delete Crew Member" />
+                  <ListView fx:id="listView" layoutX="14.0" layoutY="180.0" prefHeight="177.0" prefWidth="293.0" />
+                  <Button fx:id="selectLookupButton" layoutX="134.0" layoutY="366.0" mnemonicParsing="false" onAction="#selectLookUpToDatabase" text="Select" />
                   </children>
               </AnchorPane>
           </children>
