@@ -9,6 +9,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
+import database.dbReader;
+import database.dbWriter;
 
 public class Main extends Application {
     private static Stage primaryStage;
@@ -34,9 +38,24 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
+    
     public static void quitAction() {
         System.out.println("Exiting...");
+        dbReader reader =new dbReader();
+        try {
+			reader.closeConn();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        dbWriter writer =new dbWriter();
+        try {
+			reader.closeConn();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
         primaryStage.close();
     }
 

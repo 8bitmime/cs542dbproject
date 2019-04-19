@@ -7,6 +7,10 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
+import model.Location;
+import model.ReceivingHospital;
+import database.dbWriter;
+
 public class Add_New_Hospital_Controller {
 
     @FXML
@@ -86,8 +90,20 @@ public class Add_New_Hospital_Controller {
     public void getType() throws IOException {
         //OTHER DATABASE STUFF
 
-        String input = hospitalName.getText();
-        mainVar.showReportCallSceneWithPassedHospitalData(input);
+        String name = hospitalName.getText();
+        String streetNam = streetName.getText();
+        String streetN = streetNum.getText();
+        String address = streetN + " "+streetNam;
+        dbWriter writter =new dbWriter();
+        Location loc = new Location(name, address, "Hospital");
+        ReceivingHospital hospital =  new ReceivingHospital(name,loc);
+        try {
+			writter.insertHospital(hospital);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        mainVar.showReportCallSceneWithPassedHospitalData(name);
 
         // clear all the fields after submission
         clearFields();

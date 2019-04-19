@@ -8,11 +8,7 @@ public class Staff {
 	private int badgeID;
 	private Timestamp dateofBirth;
 	
-	public Staff(){
-		
-	}
 	public Staff(int staffID, String name, int badgeID, Timestamp dateofBirth) {
-		super();
 		this.staffID = staffID;
 		this.name = name;
 		this.badgeID = badgeID;
@@ -22,6 +18,13 @@ public class Staff {
 	public Staff(String name, int badgeID) {
 		this.name = name;
 		this.badgeID = badgeID;
+	}
+	
+	public Staff(String name, int badgeID, Timestamp dateofBirth) {
+
+		this.name = name;
+		this.badgeID = badgeID;
+		this.dateofBirth = dateofBirth;
 	}
 	
 	public int getStaffID() {
@@ -47,6 +50,11 @@ public class Staff {
 	}
 	public void setDateofBirth(Timestamp dateofBirth) {
 		this.dateofBirth = dateofBirth;
+	}
+
+	@Override
+	public String toString() {
+		return  staffID+","+name.replaceAll("\\s+","") + ","+ badgeID + "," + dateofBirth;
 	}
 	
 	

@@ -6,6 +6,11 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+
+import database.dbWriter;
+import util.DateConverter;
+import model.Staff;
 
 public class Add_New_Crew_Controller {
 
@@ -85,7 +90,18 @@ public class Add_New_Crew_Controller {
     // called when submit button is clicked
     public void addToDatabase() {
         // DATABASE STUFF
-
+    	String name = nameBox.getText();
+    	String dob = dobBox.getText();
+    	int badgeID =Integer.parseInt(badgeIDBox.getText());
+    	Timestamp dobTime = DateConverter.converBod(dob);
+    	Staff staff = new Staff(name,badgeID,dobTime);
+    	dbWriter writter =new dbWriter();
+    	try {
+			writter.insertStaff(staff);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         // clear all the fields after submission
         clearFields();
     }

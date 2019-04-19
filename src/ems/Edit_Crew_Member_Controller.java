@@ -7,8 +7,18 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
+import model.Staff;
+import util.DateConverter;
+import database.dbReader;
+import database.dbWriter;
 
 public class Edit_Crew_Member_Controller {
+	
+	private List<Staff> staffList = new ArrayList<>();
 
     @FXML
     private MenuItem reportCallMenu;
@@ -111,7 +121,20 @@ public class Edit_Crew_Member_Controller {
 
         // This shows how to add things to the selectable list view
         //Note, these will be set by whatever is in the database
-        listView.getItems().addAll("Rachel Hahn, 07/15/1997, 01, 15", "Rachel Hahn, 08/10/1996, 02, 16");
+    	dbReader reader = new dbReader();
+    	String name = nameLookUp.getText();
+    	String temp = dobLookUp.getText();
+    	Timestamp sdob = DateConverter.converBod(temp);
+    	
+    	try {
+    		staffList = reader.getStaff(name, sdob);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	for(Staff staff:staffList){
+    		listView.getItems().add(staff.toString());
+    	}
 
     }
 
@@ -119,20 +142,35 @@ public class Edit_Crew_Member_Controller {
     public void selectLookUpToDatabase() {
         // DATABASE STUFF
 
+    	int selectedIndex = listView.getSelectionModel().getSelectedIndex();
+    	Staff selectstaff = staffList.get(selectedIndex);
         // This shows how to populate the edit textboxes
         //Note, these will be set by whatever is the database
-        nameEdit.setText("Rachel Hahn");
-        dobEdit.setText("07/15/1997");
-        badgeIDEdit.setText("01");
-        staffIDEdit.setText("15");
+        nameEdit.setText(selectstaff.getName());
+        dobEdit.setText(""+selectstaff.getDateofBirth());
+        badgeIDEdit.setText(""+selectstaff.getBadgeID());
+        staffIDEdit.setText(""+selectstaff.getStaffID());
 
     }
 
     // called when edit submit button is clicked
     public void addEditToDatabase() {
         // DATABASE STUFF
-
         // clear all the fields after submission
+    	String name = nameEdit.getText();
+    	String dob_string = dobEdit.getText();
+    	Timestamp dateofBirth = DateConverter.converBod(dob_string);
+    	int badgeID = Integer.parseInt(badgeIDEdit.getText());
+    	int staffID = Integer.parseInt(staffIDEdit.getText());
+    	Staff updateStaff = new Staff(staffID, name,  badgeID,  dateofBirth);
+    	dbWriter writer = new dbWriter();
+    	try {
+			writer.updateStaff(updateStaff);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
         clearEditFields();
         clearLookUpFields();
         listView.getItems().clear();
@@ -141,7 +179,19 @@ public class Edit_Crew_Member_Controller {
     // called when delete button is clicked
     public void deleteFromDatabase() {
         // DATABASE STUFF
-
+     	String name = nameEdit.getText();
+    	String dob_string = dobEdit.getText();
+    	Timestamp dateofBirth = DateConverter.converBod(dob_string);
+    	int badgeID = Integer.parseInt(badgeIDEdit.getText());
+    	int staffID = Integer.parseInt(staffIDEdit.getText());
+    	Staff updateStaff = new Staff(staffID, name,  badgeID,  dateofBirth);
+    	dbWriter writer = new dbWriter();
+    	try {
+			writer.deleteStaff(updateStaff);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         // clear all the fields after deletion
         clearEditFields();
         clearLookUpFields();

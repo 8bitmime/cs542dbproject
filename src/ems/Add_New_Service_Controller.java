@@ -7,6 +7,9 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
+import model.ReceivingService;
+import database.dbWriter;
+
 public class Add_New_Service_Controller {
 
     @FXML
@@ -80,8 +83,16 @@ public class Add_New_Service_Controller {
     // get user input and send to report a call controller to add to drop down list
     public void getType() throws IOException {
         // DATABASE STUFF
-
-        String input = serviceName.getText();
+    	dbWriter writter =new dbWriter();
+    	String input = serviceName.getText();
+    	ReceivingService recvService = new ReceivingService(input);
+    	try {
+			writter.insertService(recvService);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
         mainVar.showReportCallSceneWithPassedServiceData(input);
 
         // clear all the fields after submission

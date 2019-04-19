@@ -93,9 +93,9 @@ public class CSVPaser {
 			
 			Location location = new Location(record[15],"",record[19]);
 			//populate Staff
-			Staff staff1 = new Staff( record[11], processBadgeID(record[16]));
-			Staff staff2 = new Staff( record[12], processBadgeID(record[17]));
-			Staff staff3 = new Staff( record[13], processBadgeID(record[18]));
+			Staff staff1 = new Staff( record[11].replaceAll("\\s+",""), processBadgeID(record[16]));
+			Staff staff2 = new Staff( record[12].replaceAll("\\s+",""), processBadgeID(record[17]));
+			Staff staff3 = new Staff( record[13].replaceAll("\\s+",""), processBadgeID(record[18]));
 			List<Staff> staffList = new ArrayList<Staff>();
 			staffList.add(staff1);
 			staffList.add(staff2);

@@ -5,12 +5,29 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
-public class Report_A_Call_Controller implements Initializable {
+import database.dbWriter;
+import util.DateConverter;
+import model.Call;
+import model.Location;
+import model.Outcome;
+import model.ReceivingHospital;
+import model.ReceivingService;
+import model.Staff;
+import model.TTime;
 
+public class Report_A_Call_Controller implements Initializable {
+	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
     // Report A Call Dropdown Lists
     ObservableList<String> dispatchedAsImpressionsList = FXCollections.observableArrayList("Not Recorded","Abdominal Pain", "Allergies", "Animal Bite", "Assault",
             "Back Pain", "Breathing Problems", "Burns", "CO Poisoning/Hazmat", "Cardiac Arrest", "Chest Pain", "Choking", "Convulsions/Seizure", "Diabetic Problem", "Drowning",
@@ -300,9 +317,96 @@ public class Report_A_Call_Controller implements Initializable {
     // called when submit button is clicked
     public void addToDatabase() {
         // DATABASE STUFF
+    	List<Staff> crewList = new ArrayList<>();
+    	List<TTime> timeList = new ArrayList<TTime>();
+    	
+    	String name1 = nameField1.getText();
+        int badgeID1 = Integer.parseInt(badgeIDField1.getText());
+        Staff staff1 = new Staff(name1,badgeID1);
+        
+        String name2 = nameField2.getText();
+        int badgeID2 = Integer.parseInt(badgeIDField2.getText());
+        Staff staff2 = new Staff(name2,badgeID2);
+        
+        String name3 = nameField3.getText();
+        int badgeID3 = Integer.parseInt(badgeIDField3.getText());
+        Staff staff3 = new Staff(name3,badgeID3);
+        crewList.add(staff1);
+        crewList.add(staff2);
+        crewList.add(staff3);
+        
+        LocalDate callDatet =  callTimeDate.getValue();        
+        Timestamp callDate = dateMerg(callDatet,callTimeHour.getValue(),callTimeMin.getValue());
+        System.out.println(callDate);
+        TTime calltime = new TTime(callDate,"Date Available");
 
+        
+        String locType = callLocationType.getValue();
+        String locName = callLocationName.getText();
+        String locAddr = callLocationAddress.getText();
+        Location callLocation = new Location(locType, locName, locAddr);
+        
+        String dispatchAs = dispatchedAs.getValue();
+        String impress = impression.getValue();
+        String outResult = outcome.getValue();
+        String recvService = receivingService.getValue();
+        String recvHospital = receivingHospital.getValue();
+        Outcome outcome = null;
+        if(!recvService.equalsIgnoreCase("Not Applicable")){
+        	ReceivingService service = new ReceivingService(recvService);
+        	 outcome = new Outcome( outResult,service,
+        			null);
+        }
+        if(!recvHospital.equalsIgnoreCase("Not Applicable")){
+        	Location hospLoc = new Location("Hospital","","");
+        	ReceivingHospital hospital = new ReceivingHospital(recvHospital, hospLoc);
+        	 outcome = new Outcome(outResult, null,
+        			hospital);
+        }
+        
+        
+        
+        Timestamp eaDispatch = dateMerg(ambDispatchedDate.getValue(),ambDispatchedHour.getValue(),ambDispatchedMin.getValue());
+        TTime aDispatch = new TTime(eaDispatch,"EA-Dispatch");
+        
+        Timestamp eaArrived = dateMerg(ambArrivedDate.getValue(),ambArrivedHour.getValue(),ambArrivedMin.getValue());
+        TTime aArrived = new TTime(eaArrived,"EA-Arrived");
+        
+        Timestamp eaClear = dateMerg(ambClearedDate.getValue(),ambClearedHour.getValue(),ambClearedMin.getValue());
+        TTime aClear = new TTime(eaClear,"EA-Clear");
+        
+        Timestamp staffDispatch = dateMerg(staffDispatchedDate.getValue(),staffDispatchedHour.getValue(),staffDispatchedMin.getValue());
+        TTime sDispatch = new TTime(staffDispatch,"Date Dispatched");
+        
+        Timestamp staffArrived = dateMerg(staffDispatchedDate.getValue(),staffDispatchedHour.getValue(),staffDispatchedMin.getValue());
+        TTime sArrived = new TTime(staffArrived,"Date Enroute");    
+        
+        Timestamp staffClear = dateMerg(staffClearedDate.getValue(),staffClearedHour.getValue(),staffClearedMin.getValue());
+        TTime sClear = new TTime(staffClear,"Date Enroute");  
+        
+        timeList.add(sDispatch);
+		timeList.add(sArrived);
+		timeList.add(sClear);
+		timeList.add(calltime);
+		timeList.add(aDispatch);
+		timeList.add(aArrived);
+		timeList.add(aClear);
+        
+        Call  call = new Call(dispatchAs,impress, outcome, timeList, crewList, callLocation);
+        
+        dbWriter writer = new dbWriter();
+        try {
+			writer.inserCall(call);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
         // clear all the fields after submission
         clearFields();
     }
-
+    
+    private Timestamp dateMerg(LocalDate callDate, String hour, String min){
+    	return DateConverter.converDate(callDate.format(formatter)+" "+hour +":"+min);
+    }
 }

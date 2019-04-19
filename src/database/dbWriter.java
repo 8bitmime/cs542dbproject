@@ -347,7 +347,7 @@ public class dbWriter {
 		try {
 
 			PreparedStatement ps = conn
-					.prepareStatement("INSERT INTO staff (staff_id, name_s, badge_id,dob) values(seq_staffid.nextval,?,?,?)");
+					.prepareStatement("INSERT INTO staff (staff_id, name_s, badge_id,dob) values(seq_staffid.nextval,?,?,?)",Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, staff.getName());
 			ps.setInt(2, staff.getBadgeID());
 			ps.setTimestamp(3, staff.getDateofBirth());
@@ -390,8 +390,40 @@ public class dbWriter {
 		}
 	}
 	
+	public boolean updateStaff(Staff staff) throws Exception{
+		try {
+
+			PreparedStatement ps = conn
+					.prepareStatement("UPDATE staff Set name_s =?, badge_id =?,dob =? WHERE staff_id =?");
+			ps.setString(1, staff.getName());
+			ps.setInt(2, staff.getBadgeID());
+			ps.setTimestamp(3, staff.getDateofBirth());
+			ps.setInt(4, staff.getStaffID());
+			ps.execute();
+			ps.close();
+			return true;
+		} catch (Exception e) {
+			throw new Exception("Failed to insert staff: " + e.getMessage());
+		}
+	}
+	
+	public boolean deleteStaff(Staff staff) throws Exception{
+		try {
+			PreparedStatement ps = conn
+					.prepareStatement("Delete staff WHERE staff_id =?");
+			ps.setInt(1, staff.getStaffID());
+			ps.execute();
+			ps.close();
+			return true;
+		} catch (Exception e) {
+			throw new Exception("Failed to Delete staff: " + e.getMessage());
+		}
+	}
+	
 	public void closeConn() throws SQLException{
 		conn.close();
 	}
+	
+	
 
 }
