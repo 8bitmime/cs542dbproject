@@ -392,7 +392,7 @@ public class dbWriter {
 	
 	public boolean updateStaff(Staff staff) throws Exception{
 		try {
-
+			System.out.println(staff.getDateofBirth());
 			PreparedStatement ps = conn
 					.prepareStatement("UPDATE staff Set name_s =?, badge_id =?,dob =? WHERE staff_id =?");
 			ps.setString(1, staff.getName());

@@ -147,7 +147,7 @@ public class Edit_Crew_Member_Controller {
         // This shows how to populate the edit textboxes
         //Note, these will be set by whatever is the database
         nameEdit.setText(selectstaff.getName());
-        dobEdit.setText(""+selectstaff.getDateofBirth());
+        dobEdit.setText(""+DateConverter.converBodtoString(selectstaff.getDateofBirth()));
         badgeIDEdit.setText(""+selectstaff.getBadgeID());
         staffIDEdit.setText(""+selectstaff.getStaffID());
 

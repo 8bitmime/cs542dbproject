@@ -3,6 +3,7 @@ package util;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class DateConverter {
 	private final static String dateFormate ="MM/dd/yyyy HH:mm";
@@ -30,5 +31,12 @@ public class DateConverter {
 			timeStamp = null;
 		}
 		return timeStamp;
+	}
+	
+	public static String converBodtoString(Timestamp date){
+		SimpleDateFormat formatter = new SimpleDateFormat(bodFormate);
+		Date temp = new Date();
+		temp.setTime(date.getTime());
+		return formatter.format(temp);
 	}
 }
